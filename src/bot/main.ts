@@ -26,18 +26,25 @@ class Bot {
   }
 
   private async message(message: Message) {
-    if (!isMessageValid(message)) return;
-    if (!isCommand(message)) return;
+    try {
+      if (!isMessageValid(message)) return;
+      if (!isCommand(message)) return;
 
-    const invocation = parseCommand(message);
+      const invocation = parseCommand(message);
 
-    const match = commandsRegister.find(
-      (command) => command.name === invocation.name
-    );
+      const match = commandsRegister.find(
+        (command) => command.name === invocation.name
+      );
 
-    if (match) {
-      const context = new CommandContext(invocation);
-      match.run(message, context);
+      if (match) {
+        const context = new CommandContext(invocation);
+        match.run(message, context);
+      }
+    } catch (e) {
+      console.error(
+        `An error occurred during the execution of a message handler that wasn't properly caught.`
+      );
+      console.error(e);
     }
   }
 }
