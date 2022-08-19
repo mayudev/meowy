@@ -1,4 +1,5 @@
 import { Message } from 'revolt.js';
+import Command from './types/Command';
 import { CommandArguments } from './types/CommandArguments';
 
 const prefix = '?';
@@ -22,3 +23,5 @@ export function isCommand(message: Message) {
 export function parseCommand(message: Message) {
   return new CommandArguments(message.content!);
 }
+
+export function registerCommand(command: Command) {}

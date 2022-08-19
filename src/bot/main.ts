@@ -1,7 +1,10 @@
 import { Client, Message } from 'revolt.js';
 import { readToken } from '../config/config';
+import commandsRegister from './commands';
+import registerCommands from './commands';
 import PingCommand from './commands/ping';
 import { isCommand, isMessageValid, parseCommand } from './handler';
+import Command from './types/Command';
 import CommandContext from './types/CommandContext';
 
 class Bot {
@@ -31,9 +34,13 @@ class Bot {
 
     const invocation = parseCommand(message);
 
-    if (invocation.name === 'ping') {
+    const match = commandsRegister.find(
+      (command) => command.name === invocation.name
+    );
+
+    if (match) {
       const context = new CommandContext(invocation);
-      new PingCommand().run(message, context);
+      match.run(message, context);
     }
   }
 }
