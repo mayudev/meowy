@@ -32,8 +32,8 @@ class Bot {
     const invocation = parseCommand(message);
 
     if (invocation.name === 'ping') {
-      const context = new CommandContext(message, invocation);
-      new PingCommand().run(context);
+      const context = new CommandContext(invocation);
+      new PingCommand().run(message, context);
     }
   }
 }

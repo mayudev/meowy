@@ -1,6 +1,7 @@
+import { Message } from 'revolt.js';
 import CommandContext from './CommandContext';
 
 export default interface Command {
   name: string;
-  run: (context: CommandContext) => Promise<any>;
+  run: (message: Message, context: CommandContext) => Promise<any> | any;
 }
