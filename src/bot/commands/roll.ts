@@ -7,7 +7,7 @@ import CommandContext from '../types/CommandContext';
 export default class RollCommand implements Command {
   name = 'roll';
   description = 'Rolls a dice';
-  usage = '?roll [size from 1 to 1000]';
+  usage = 'roll [size from 1 to 1000]';
   category = CommandCategory.Fun;
 
   getSize(args: string[]) {
