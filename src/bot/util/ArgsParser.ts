@@ -7,7 +7,7 @@ export default class ArgsParser {
    * @param message Message object
    * @param args Command arguments
    * @returns Mentioned user's object
-   * @throws UserNotFoundError
+   * @throws {UserNotFoundError | WrongArgumentError},
    */
   static asMention(message: Message, args: string[]) {
     let user;
