@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node --experimental-specifier-resolution=node dist/main",
     "build": "rm -rf dist && tsc",
-    "dev": "tsc-watch --onSuccess \"yarn start\""
+    "dev": "tsc-watch --onSuccess \"pnpm start\""
   },
   "devDependencies": {
     "@types/node": "^18.7.6",
