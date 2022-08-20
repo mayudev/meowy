@@ -4,12 +4,13 @@
   "scripts": {
     "start": "node --experimental-specifier-resolution=node dist/main",
     "build": "rm -rf dist && tsc",
-    "dev": "tsc-watch --onSuccess \"pnpm start\""
+    "start:dev": "node --inspect=0.0.0.0:9229 --experimental-specifier-resolution=node dist/main",
+    "dev": "nodemon -x \"npm run start:dev\" src/main"
   },
   "devDependencies": {
     "@types/node": "^18.7.6",
+    "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
-    "tsc-watch": "^5.0.3",
     "typescript": "^4.7.4"
   },
   "dependencies": {
