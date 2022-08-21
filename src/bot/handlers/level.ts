@@ -35,3 +35,10 @@ export async function handleMemberLevel(
 function determineLevel(exp: number) {
   return Math.floor(0.15 * Math.sqrt(exp));
 }
+
+/**
+ * Reversed determineLevel
+ */
+export function determineExpRequired(level: number) {
+  return Math.ceil(Math.pow(level / 0.15, 2));
+}
