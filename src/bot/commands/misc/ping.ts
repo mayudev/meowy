@@ -1,7 +1,7 @@
 import { Message } from 'revolt.js';
-import Command from '../types/Command';
-import CommandCategory from '../types/CommandCategory';
-import CommandContext from '../types/CommandContext';
+import Command from '../../types/Command';
+import CommandCategory from '../../types/CommandCategory';
+import CommandContext from '../../types/CommandContext';
 
 export default class PingCommand implements Command {
   name = 'ping';

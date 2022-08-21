@@ -1,9 +1,9 @@
 import { Message } from 'revolt.js';
-import { UserNotFoundError } from '../../common/errors';
-import Command from '../types/Command';
-import CommandCategory from '../types/CommandCategory';
-import CommandContext from '../types/CommandContext';
-import ArgsParser from '../util/ArgsParser';
+import { UserNotFoundError } from '../../../common/errors';
+import Command from '../../types/Command';
+import CommandCategory from '../../types/CommandCategory';
+import CommandContext from '../../types/CommandContext';
+import ArgsParser from '../../util/ArgsParser';
 
 export default class AvatarCommand implements Command {
   name = 'avatar';

@@ -1,8 +1,8 @@
 import { Message } from 'revolt.js';
-import { WrongArgumentError } from '../../common/errors';
-import Command from '../types/Command';
-import CommandCategory from '../types/CommandCategory';
-import CommandContext from '../types/CommandContext';
+import { WrongArgumentError } from '../../../common/errors';
+import Command from '../../types/Command';
+import CommandCategory from '../../types/CommandCategory';
+import CommandContext from '../../types/CommandContext';
 
 export default class RollCommand implements Command {
   name = 'roll';
