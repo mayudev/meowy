@@ -12,7 +12,9 @@ export function isMessageValid(message: Message) {
     // the message wasn't sent by the bot
     message.author_id != message.client.user?._id &&
     // content is not empty
-    message.content
+    message.content &&
+    message.channel &&
+    message.channel.server_id
   );
 }
 

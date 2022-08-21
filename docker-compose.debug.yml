@@ -1,6 +1,16 @@
 version: '3.4'
 
 services:
+  database:
+    image: 'mongo'
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=meowy
+    volumes:
+      - dbdata:/data/db
+    ports:
+      - 27017:27017
+
   meowy:
     image: meowy
     build: .
@@ -9,9 +19,15 @@ services:
       - /usr/src/app/node_modules
     environment:
       NODE_ENV: development
+      MONGO_URL: mongodb://database:27017
     env_file:
       - .env
     ports:
       - 3000:3000
       - 9229:9229
+    depends_on:
+      - database
     command: 'npm run dev'
+
+volumes:
+  dbdata:

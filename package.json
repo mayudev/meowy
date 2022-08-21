@@ -5,7 +5,7 @@
     "start": "node --experimental-specifier-resolution=node dist/main",
     "build": "rm -rf dist && tsc",
     "start:dev": "node --inspect=0.0.0.0:9229 --experimental-specifier-resolution=node dist/main",
-    "dev": "nodemon -x \"npm run start:dev\" src/main"
+    "dev": "tsc -w -p . & nodemon -x \"npm run start:dev\" dist/main"
   },
   "devDependencies": {
     "@types/node": "^18.7.6",
@@ -16,6 +16,7 @@
   "dependencies": {
     "chalk": "^5.0.1",
     "dotenv": "^16.0.1",
+    "mongodb": "^4.9.0",
     "revolt.js": "^6.0.13"
   }
 }

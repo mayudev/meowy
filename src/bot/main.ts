@@ -1,14 +1,19 @@
+import { Db } from 'mongodb';
 import { Client, Message } from 'revolt.js';
 import { readToken } from '../config/config';
+import DatabaseController from '../database/controller';
 import commandsRegister from './commands';
 import { isCommand, isMessageValid, parseCommand } from './handler';
+import { handleMemberLevel } from './handlers/level';
 import CommandContext from './types/CommandContext';
 
 class Bot {
   private client: Client;
+  private controller: DatabaseController;
 
-  constructor() {
+  constructor(private db: Db) {
     this.client = new Client();
+    this.controller = new DatabaseController(db);
   }
 
   start() {
@@ -28,7 +33,11 @@ class Bot {
   private async message(message: Message) {
     try {
       if (!isMessageValid(message)) return;
-      if (!isCommand(message)) return;
+
+      if (!isCommand(message)) {
+        handleMemberLevel(message, this.controller);
+        return;
+      }
 
       const invocation = parseCommand(message);
 
@@ -37,7 +46,7 @@ class Bot {
       );
 
       if (match) {
-        const context = new CommandContext(invocation);
+        const context = new CommandContext(invocation, this.controller);
         match.run(message, context);
       }
     } catch (e) {
