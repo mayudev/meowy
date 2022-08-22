@@ -28,6 +28,21 @@ export default class Members {
     return result;
   }
 
+  /**
+   * Finds a server's top {number} scoring members
+   */
+  async findServerTop(serverId: string, count: number) {
+    return this.collection
+      .find({
+        serverId,
+      })
+      .sort({
+        exp: -1,
+      })
+      .limit(count)
+      .toArray();
+  }
+
   async find(userId: string, serverId: string) {
     return this.collection.findOne({
       userId,
