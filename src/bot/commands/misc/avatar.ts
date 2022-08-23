@@ -15,7 +15,7 @@ export default class AvatarCommand implements Command {
     let url;
 
     try {
-      const ping = ArgsParser.asMention(message, context.invocation.args);
+      const ping = await ArgsParser.asMention(message, context.invocation.args);
       url = ping.generateAvatarURL();
     } catch (e) {
       if (e instanceof UserNotFoundError) {

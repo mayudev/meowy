@@ -1,4 +1,4 @@
-import { Message } from 'revolt.js';
+import { Client, Member, Message, User } from 'revolt.js';
 import { UserNotFoundError, WrongArgumentError } from '../../common/errors';
 
 export default class ArgsParser {
@@ -9,18 +9,30 @@ export default class ArgsParser {
    * @returns Mentioned user's object
    * @throws {UserNotFoundError | WrongArgumentError},
    */
-  static asMention(message: Message, args: string[]) {
-    let user;
+  static async asMention(message: Message, args: string[]) {
+    let user: Member | undefined;
 
     if (message.mentions?.length! > 0) {
-      user = message.mentions![0];
+      // User mentioned
+      user = await grabUser(message, message.mention_ids![0]);
     } else if (args.length > 0 && args[0].length === 26) {
-      user = message.client.users.get(args[0]);
+      // ID provided directly
+
+      user = await grabUser(message, args[0]);
     } else {
       throw new WrongArgumentError();
     }
 
     if (typeof user === 'undefined') throw new UserNotFoundError();
     else return user;
+  }
+}
+
+async function grabUser(message: Message, id: string) {
+  try {
+    const first = await message.channel!.server!.fetchMember(id);
+    return first;
+  } catch (e) {
+    return undefined;
   }
 }
