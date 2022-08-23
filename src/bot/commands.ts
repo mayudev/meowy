@@ -13,7 +13,10 @@ const commandsRegister: Command[] = [
   new AvatarCommand(),
   new RankCommand(),
   new LeaderboardCommand(),
-  new SayCommand(), // TODO disable this in production
 ];
+
+if (process.env.NODE_ENV === 'development') {
+  commandsRegister.push(new SayCommand());
+}
 
 export default commandsRegister;
