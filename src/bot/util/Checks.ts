@@ -1,21 +1,32 @@
-import { Member, Message } from 'revolt.js';
-import { hasBanPermission } from './permissions';
+import { Member, Message, Server } from 'revolt.js';
 
-const Messages = {
-  NoUserPermissions: ':x: You cannot **ban members**',
-  NoBotPermissions: ':x: The bot cannot **ban members**',
-  BanYourself: ':x: You cannot ban yourself.',
-  BanBot: `:pleading_face: Please don't ban me`,
-};
+const rawMessages = (intent: string) => ({
+  NoUserPermissions: `:x: You cannot **${intent} members**`,
+  NoBotPermissions: `:x: The bot cannot **${intent} members**`,
+  BanYourself: `:x: You cannot ${intent} yourself.`,
+  BanBot: `:pleading_face: Please don't ${intent} me`,
+});
+
+type AllowedActions = 'BanMembers' | 'KickMembers';
+
+function hasPermission(member: Member, server: Server, action: AllowedActions) {
+  return member.hasPermission(server, action);
+}
 
 export default class Checks {
   /**
-   * canBan checks if an action of banning can be performed.
+   * canPerformModAction checks if a moderation action can be performed.
    * It sends the appropriate error message if not.
    */
-  static async canBan(message: Message, target: Member) {
+  static async canPerformModAction(
+    message: Message,
+    target: Member,
+    action: AllowedActions
+  ) {
+    const Messages = rawMessages(action === 'BanMembers' ? 'ban' : 'kick');
+
     // Check if user invoking the command has enough permissions
-    if (!hasBanPermission(message.member!, message.channel!.server!)) {
+    if (!hasPermission(message.member!, message.channel!.server!, action)) {
       message.channel?.sendMessage({
         content: Messages.NoUserPermissions,
       });
@@ -25,9 +36,10 @@ export default class Checks {
 
     // Check if the bot has enough permissions
     if (
-      !hasBanPermission(
+      !hasPermission(
         message.channel!.server!.member!,
-        message.channel!.server!
+        message.channel!.server!,
+        action
       )
     ) {
       message.channel?.sendMessage({

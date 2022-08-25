@@ -5,7 +5,6 @@ import CommandCategory from '../../types/CommandCategory';
 import CommandContext from '../../types/CommandContext';
 import ArgsParser from '../../util/ArgsParser';
 import Checks from '../../util/Checks';
-import { hasBanPermission } from '../../util/permissions';
 import sanitize from '../../util/sanitize';
 
 export default class BanCommand implements Command {
@@ -21,7 +20,7 @@ export default class BanCommand implements Command {
         context.invocation.args
       );
 
-      if (await Checks.canBan(message, target)) {
+      if (await Checks.canPerformModAction(message, target, 'BanMembers')) {
         await message.channel!.server!.banUser(target._id.user, {
           reason: `//by ${message.author?.username} via Meowy`,
         });
