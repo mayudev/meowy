@@ -6,6 +6,7 @@ import RankCommand from './commands/level/rank';
 import LeaderboardCommand from './commands/level/leaderboard';
 import SayCommand from './commands/debug/say';
 import BanCommand from './commands/moderation/ban';
+import KickCommand from './commands/moderation/kick';
 
 // Register of all commands provided by the bot
 const commandsRegister: Command[] = [
@@ -15,6 +16,7 @@ const commandsRegister: Command[] = [
   new RankCommand(),
   new LeaderboardCommand(),
   new BanCommand(),
+  new KickCommand(),
 ];
 
 if (process.env.NODE_ENV === 'development') {

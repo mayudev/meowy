@@ -1,4 +1,4 @@
-import { Message } from 'revolt.js';
+import { Member, Message } from 'revolt.js';
 import { UserNotFoundError, WrongArgumentError } from '../../common/errors';
 
 export function handleMentionErrors(message: Message, e: unknown) {
@@ -13,4 +13,8 @@ export function handleMentionErrors(message: Message, e: unknown) {
   } else {
     console.error(e);
   }
+}
+
+export function getDisplayName(member: Member) {
+  return member.nickname || member.user?.username || '';
 }
