@@ -1,10 +1,10 @@
 import { Message } from 'revolt.js';
-import { UserNotFoundError, WrongArgumentError } from '../../../common/errors';
 import Command from '../../types/Command';
 import CommandCategory from '../../types/CommandCategory';
 import CommandContext from '../../types/CommandContext';
 import ArgsParser from '../../util/ArgsParser';
 import Checks from '../../util/Checks';
+import { handleMentionErrors } from '../../util/mention';
 import sanitize from '../../util/sanitize';
 
 export default class BanCommand implements Command {
@@ -32,17 +32,7 @@ export default class BanCommand implements Command {
         });
       }
     } catch (e) {
-      if (e instanceof UserNotFoundError) {
-        return message.channel?.sendMessage({
-          content: ':x: User not found',
-        });
-      } else if (e instanceof WrongArgumentError) {
-        return message.channel?.sendMessage({
-          content: ':x: User not mentioned',
-        });
-      } else {
-        console.error(e);
-      }
+      handleMentionErrors(message, e);
     }
   }
 }
