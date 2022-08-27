@@ -1,4 +1,6 @@
+import { Message } from 'revolt.js';
 import DatabaseController from '../../database/controller';
+import { sendResult } from '../util/Results';
 import { CommandArguments } from './CommandArguments';
 
 /**
@@ -9,4 +11,8 @@ export default class CommandContext {
     public invocation: CommandArguments,
     public controller: DatabaseController
   ) {}
+
+  async send(message: Message, content: string) {
+    return sendResult(message, content);
+  }
 }

@@ -5,6 +5,7 @@ import CommandContext from '../../types/CommandContext';
 import ArgsParser from '../../util/ArgsParser';
 import Checks from '../../util/Checks';
 import { handleMentionErrors } from '../../util/mention';
+import { Results } from '../../util/Results';
 
 export default class NickCommand implements Command {
   name = 'nick';
@@ -19,11 +20,12 @@ export default class NickCommand implements Command {
         context.invocation.args
       );
 
-      if (!Checks.botHasPermission(message, 'ManageNicknames')) {
-        console.error('no perms');
-        // TODO implement unified bot error messages
-      } else if (!Checks.userHasPermission(message, 'ManageNicknames')) {
-        // TODO
+      const permission = 'ManageNicknames';
+
+      if (!Checks.userHasPermission(message, permission)) {
+        await context.send(message, Results.userHasNoPerms(permission));
+      } else if (!Checks.botHasPermission(message, permission)) {
+        await context.send(message, Results.botHasNoPerms(permission));
       } else {
         const nickname = context.invocation.reason();
 
