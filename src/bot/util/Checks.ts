@@ -7,7 +7,7 @@ const rawMessages = (intent: string) => ({
   BanBot: `:pleading_face: Please don't ${intent} me`,
 });
 
-type AllowedActions = 'BanMembers' | 'KickMembers';
+type AllowedActions = 'BanMembers' | 'KickMembers' | 'ManageNicknames';
 
 enum Target {
   Neither,
@@ -67,7 +67,7 @@ export default class Checks {
     // Check if user invoking the command has enough permissions
     if (!this.userHasPermission(message, action)) {
       if (!silent)
-        message.channel?.sendMessage({
+        await message.channel?.sendMessage({
           content: Messages.NoUserPermissions,
         });
 
@@ -77,7 +77,7 @@ export default class Checks {
     // Check if the bot has enough permissions
     if (!this.botHasPermission(message, action)) {
       if (!silent)
-        message.channel?.sendMessage({
+        await message.channel?.sendMessage({
           content: Messages.NoBotPermissions,
         });
 
@@ -88,13 +88,13 @@ export default class Checks {
     switch (this.checkTarget(message, target)) {
       case Target.Author:
         if (!silent)
-          message.channel?.sendMessage({
+          await message.channel?.sendMessage({
             content: Messages.BanYourself,
           });
         return false;
       case Target.Bot:
         if (!silent)
-          message.channel?.sendMessage({
+          await message.channel?.sendMessage({
             content: Messages.BanBot,
           });
         return false;

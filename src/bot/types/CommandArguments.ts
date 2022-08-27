@@ -17,4 +17,11 @@ export class CommandArguments {
   join() {
     return this.args.join(' ');
   }
+
+  /**
+   * Joins the arguments without the first one
+   */
+  reason() {
+    return this.args.slice(1).join(' ');
+  }
 }
