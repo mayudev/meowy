@@ -12,6 +12,9 @@ export default class CommandContext {
     public controller: DatabaseController
   ) {}
 
+  /**
+   * A shorthand to send a reply message
+   */
   async send(message: Message, content: string) {
     return sendResult(message, content);
   }

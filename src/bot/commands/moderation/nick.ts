@@ -34,17 +34,16 @@ export default class NickCommand implements Command {
             nickname,
           });
 
-          await message.channel?.sendMessage({
-            content: `:white_check_mark: Username changed`,
-          });
+          await context.send(message, `${Results.success} Username changed`);
         } else {
           await target.edit({
             remove: ['Nickname'],
           });
 
-          await message.channel?.sendMessage({
-            content: `:white_check_mark: Username has been reset.`,
-          });
+          await context.send(
+            message,
+            `${Results.success} Username has been reset.`
+          );
         }
       }
     } catch (e) {
