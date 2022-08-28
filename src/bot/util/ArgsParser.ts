@@ -26,6 +26,50 @@ export default class ArgsParser {
     if (typeof user === 'undefined') throw new UserNotFoundError();
     else return user;
   }
+
+  /**
+   * Parses time provided in [length][mark] form e.g.: 1s, 3h, 365y
+   * Returns null if incorrect length was provided, 0 if no length was provided.
+   */
+  static asTime(arg: string) {
+    if (!arg || arg.length === 0) {
+      return 0;
+    }
+
+    let match = arg.match(/([0-9]{1,3}[smhdwy])/);
+
+    if (!match) {
+      return null;
+    }
+
+    const mark = match[0].at(-1); // smhdwy
+    const num = Number(match[0].slice(0, -1));
+
+    let multiplier = 1;
+
+    switch (mark) {
+      case 's':
+        multiplier = 1;
+        break;
+      case 'm':
+        multiplier = 60;
+        break;
+      case 'h':
+        multiplier = 60 * 60;
+        break;
+      case 'd':
+        multiplier = 60 * 60 * 24;
+        break;
+      case 'w':
+        multiplier = 60 * 60 * 24 * 7;
+        break;
+      case 'y':
+        multiplier = 60 * 60 * 24 * 365;
+        break;
+    }
+
+    return multiplier * num * 1000;
+  }
 }
 
 async function grabUser(message: Message, id: string) {

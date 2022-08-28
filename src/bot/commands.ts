@@ -8,6 +8,7 @@ import SayCommand from './commands/debug/say';
 import BanCommand from './commands/moderation/ban';
 import KickCommand from './commands/moderation/kick';
 import NickCommand from './commands/moderation/nick';
+import MuteCommand from './commands/moderation/mute';
 
 // Register of all commands provided by the bot
 const commandsRegister: Command[] = [
@@ -19,6 +20,7 @@ const commandsRegister: Command[] = [
   new BanCommand(),
   new KickCommand(),
   new NickCommand(),
+  new MuteCommand(),
 ];
 
 if (process.env.NODE_ENV === 'development') {

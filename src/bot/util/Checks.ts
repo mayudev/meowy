@@ -7,7 +7,11 @@ const rawMessages = (intent: string) => ({
   BanBot: `:pleading_face: Please don't ${intent} me`,
 });
 
-type AllowedActions = 'BanMembers' | 'KickMembers' | 'ManageNicknames';
+export type AllowedActions =
+  | 'BanMembers'
+  | 'KickMembers'
+  | 'ManageNicknames'
+  | 'TimeoutMembers';
 
 enum Target {
   Neither,
