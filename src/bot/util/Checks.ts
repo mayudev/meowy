@@ -1,8 +1,7 @@
 import { Member, Message, Server } from 'revolt.js';
+import { Results } from './Results';
 
 const rawMessages = (intent: string) => ({
-  NoUserPermissions: `:x: You cannot **${intent} members**`,
-  NoBotPermissions: `:x: The bot cannot **${intent} members**`,
   BanYourself: `:x: You cannot ${intent} yourself.`,
   BanBot: `:pleading_face: Please don't ${intent} me`,
 });
@@ -57,6 +56,34 @@ export default class Checks {
   }
 
   /**
+   * checkPermission checks if both bot and the invoking user have enough permissions
+   * to perform an action.
+   * It send the appropriate error message if not.
+   */
+  static async checkPermission(
+    message: Message,
+    action: AllowedActions,
+    silent: boolean = false
+  ) {
+    if (!Checks.userHasPermission(message, action)) {
+      if (!silent)
+        await message.channel?.sendMessage({
+          content: Results.userHasNoPerms(action),
+        });
+
+      return false;
+    } else if (!Checks.botHasPermission(message, action)) {
+      if (!silent)
+        await message.channel?.sendMessage({
+          content: Results.botHasNoPerms(action),
+        });
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /**
    * canPerformModAction checks if a moderation action can be performed.
    * It sends the appropriate error message if not.
    */
@@ -68,25 +95,8 @@ export default class Checks {
   ) {
     const Messages = rawMessages(action === 'BanMembers' ? 'ban' : 'kick');
 
-    // Check if user invoking the command has enough permissions
-    if (!this.userHasPermission(message, action)) {
-      if (!silent)
-        await message.channel?.sendMessage({
-          content: Messages.NoUserPermissions,
-        });
-
-      return false;
-    }
-
-    // Check if the bot has enough permissions
-    if (!this.botHasPermission(message, action)) {
-      if (!silent)
-        await message.channel?.sendMessage({
-          content: Messages.NoBotPermissions,
-        });
-
-      return false;
-    }
+    // Check if user invoking the command and bot have enough permissions
+    this.checkPermission(message, action, silent);
 
     // Check if the user wants to ban themselves or the bot
     switch (this.checkTarget(message, target)) {

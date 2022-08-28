@@ -21,11 +21,7 @@ export default class MuteCommand implements Command {
       );
 
       const permission = 'TimeoutMembers';
-      if (!Checks.userHasPermission(message, permission)) {
-        await context.send(message, Results.userHasNoPerms(permission));
-      } else if (!Checks.botHasPermission(message, permission)) {
-        await context.send(message, Results.botHasNoPerms(permission));
-      } else {
+      if (await Checks.checkPermission(message, permission)) {
         const length = ArgsParser.asTime(context.invocation.args[1]);
 
         if (length === 0) {

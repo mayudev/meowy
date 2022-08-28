@@ -22,11 +22,7 @@ export default class NickCommand implements Command {
 
       const permission = 'ManageNicknames';
 
-      if (!Checks.userHasPermission(message, permission)) {
-        await context.send(message, Results.userHasNoPerms(permission));
-      } else if (!Checks.botHasPermission(message, permission)) {
-        await context.send(message, Results.botHasNoPerms(permission));
-      } else {
+      if (await Checks.checkPermission(message, permission)) {
         const nickname = context.invocation.reason();
 
         if (nickname.length > 0) {
