@@ -12,7 +12,6 @@ import MuteCommand from './commands/moderation/mute';
 
 // Register of all commands provided by the bot
 const commandsRegister: Command[] = [
-  new PingCommand(),
   new RollCommand(),
   new AvatarCommand(),
   new RankCommand(),
@@ -24,7 +23,7 @@ const commandsRegister: Command[] = [
 ];
 
 if (process.env.NODE_ENV === 'development') {
-  commandsRegister.push(new SayCommand());
+  commandsRegister.push(new SayCommand(), new PingCommand());
 }
 
 export default commandsRegister;
