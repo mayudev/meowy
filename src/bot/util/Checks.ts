@@ -96,7 +96,7 @@ export default class Checks {
     const Messages = rawMessages(action === 'BanMembers' ? 'ban' : 'kick');
 
     // Check if user invoking the command and bot have enough permissions
-    this.checkPermission(message, action, silent);
+    if (!(await this.checkPermission(message, action, silent))) return false;
 
     // Check if the user wants to ban themselves or the bot
     switch (this.checkTarget(message, target)) {
