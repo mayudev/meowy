@@ -9,6 +9,7 @@ export default class RollCommand implements Command {
   description = 'Rolls a dice';
   usage = 'roll [size from 1 to 1000]';
   category = CommandCategory.Fun;
+  alias = ['dice'];
 
   getSize(args: string[]) {
     if (args.length > 0) {

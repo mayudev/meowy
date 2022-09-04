@@ -12,6 +12,7 @@ export default class MuteCommand implements Command {
   description = `Mute a member so they can't talk in the server.`;
   category = CommandCategory.Moderation;
   usage = 'mute <@ping or ID> [time | leave empty to unmute]';
+  alias = ['timeout'];
 
   async run(message: Message, context: CommandContext) {
     try {

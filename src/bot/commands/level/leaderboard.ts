@@ -12,6 +12,7 @@ export default class LeaderboardCommand implements Command {
   name = 'leaderboard';
   description = `Show server's most active users`;
   category = CommandCategory.Level;
+  alias = ['top'];
 
   buildLeaderboard = (members: RevoltMember[], leaderboard: Member[]) =>
     leaderboard.map((user) => {

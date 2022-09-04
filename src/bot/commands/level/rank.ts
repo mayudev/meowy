@@ -8,6 +8,7 @@ export default class RankCommand implements Command {
   name = 'rank';
   description = `Displays user's current level`;
   category = CommandCategory.Level;
+  alias = ['level'];
 
   async run(message: Message, context: CommandContext) {
     const member = await context.controller.members.mustFind(

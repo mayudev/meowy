@@ -42,7 +42,9 @@ class Bot {
       const invocation = parseCommand(message);
 
       const match = commandsRegister.find(
-        (command) => command.name === invocation.name
+        (command) =>
+          command.name === invocation.name ||
+          (command.alias && command.alias.indexOf(invocation.name) > -1)
       );
 
       if (match) {
