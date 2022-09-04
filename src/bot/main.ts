@@ -6,6 +6,7 @@ import commandsRegister from './commands';
 import { isCommand, isMessageValid, parseCommand } from './handler';
 import { handleMemberLevel } from './handlers/level';
 import CommandContext from './types/CommandContext';
+import { temporaryBanLoop } from './util/bans';
 
 class Bot {
   private client: Client;
@@ -28,6 +29,7 @@ class Bot {
 
   private ready() {
     console.info(`Bot is ready. Logged in as ${this.client.user?.username}`);
+    setInterval(() => temporaryBanLoop(this.client, this.controller), 60000);
   }
 
   private async message(message: Message) {

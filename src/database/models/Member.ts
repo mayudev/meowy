@@ -1,5 +1,3 @@
-import { ObjectId } from 'mongodb';
-
 /**
  * A server's member
  */
