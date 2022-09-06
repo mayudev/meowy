@@ -28,6 +28,18 @@ export default class ArgsParser {
   }
 
   /**
+   * Parses an argument as an ULID
+   * @throws {WrongArgumentError}
+   */
+  static asULID(arg: string) {
+    if (!arg || arg.length !== 26) {
+      throw new WrongArgumentError();
+    }
+
+    return arg;
+  }
+
+  /**
    * Parses time provided in [length][mark] form e.g.: 1s, 3h, 365y
    * Returns null if incorrect length was provided, 0 if no length was provided.
    */

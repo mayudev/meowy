@@ -22,6 +22,13 @@ export default class TemporaryBans {
       .toArray();
   }
 
+  async findAndDelete(userId: string, serverId: string) {
+    return this.collection.findOneAndDelete({
+      userId,
+      serverId,
+    });
+  }
+
   async insert(ban: TemporaryBan) {
     return this.collection.insertOne(ban);
   }
