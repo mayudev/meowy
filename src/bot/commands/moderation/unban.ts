@@ -4,8 +4,7 @@ import CommandCategory from '../../types/CommandCategory';
 import CommandContext from '../../types/CommandContext';
 import ArgsParser from '../../util/ArgsParser';
 import Checks from '../../util/Checks';
-import { getDisplayName, handleMentionErrors } from '../../util/mention';
-import sanitize from '../../util/sanitize';
+import { handleMentionErrors } from '../../util/mention';
 
 export default class UnbanCommand implements Command {
   name = 'unban';

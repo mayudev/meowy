@@ -22,7 +22,7 @@ export default class MuteCommand implements Command {
       );
 
       const permission = 'TimeoutMembers';
-      if (await Checks.checkPermission(message, permission)) {
+      if (await Checks.canPerformModAction(message, target, permission)) {
         const length = ArgsParser.asTime(context.invocation.args[1]);
 
         if (length === 0) {
