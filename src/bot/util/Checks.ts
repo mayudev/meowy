@@ -1,10 +1,15 @@
 import { Member, Message, Server } from 'revolt.js';
 import { Results } from './Results';
 
-const rawMessages = (intent: string) => ({
-  BanYourself: `:x: You cannot ${intent} yourself.`,
-  BanBot: `:pleading_face: Please don't ${intent} me`,
-});
+const rawBanMessages = {
+  BanYourself: `:x: You cannot ban yourself.`,
+  BanBot: `:pleading_face: Please don't ban me`,
+};
+
+const rawMessages = {
+  BanYourself: `:x: You cannot perform this action on yourself.`,
+  BanBot: `:x: You cannot perform this action on me.`,
+};
 
 export type AllowedActions =
   | 'BanMembers'
@@ -93,7 +98,7 @@ export default class Checks {
     action: AllowedActions,
     silent: boolean = false
   ) {
-    const Messages = rawMessages(action === 'BanMembers' ? 'ban' : 'kick');
+    const Messages = action === 'BanMembers' ? rawBanMessages : rawMessages;
 
     // Check if user invoking the command and bot have enough permissions
     if (!(await this.checkPermission(message, action, silent))) return false;
