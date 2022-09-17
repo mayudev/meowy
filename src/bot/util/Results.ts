@@ -4,6 +4,8 @@ export class Results {
   static success = ':white_check_mark:';
   static error = ':x:';
 
+  static userNotFound = `${Results.error} User not found`;
+
   static botHasNoPerms(permission?: string) {
     const str = permission ? ` (${permission})` : '';
     return `${this.error} Bot has insufficient permissions${str}`;
