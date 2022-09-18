@@ -60,7 +60,7 @@ ${sanitize(
       embeds: [
         {
           title: sanitize(getDisplayName(user)),
-          icon_url: user.generateAvatarURL(),
+          icon_url: user.generateAvatarURL({ size: 64 }),
           colour: themeColor,
           description,
         },

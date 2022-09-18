@@ -11,6 +11,8 @@ import NickCommand from './commands/moderation/nick';
 import MuteCommand from './commands/moderation/mute';
 import UnbanCommand from './commands/moderation/unban';
 import UserCommand from './commands/misc/user';
+import RoleAdmCommand from './commands/moderation/roleadm';
+import RoleCommand from './commands/level/role';
 
 // Register of all commands provided by the bot
 const commandsRegister: Command[] = [
@@ -24,6 +26,8 @@ const commandsRegister: Command[] = [
   new MuteCommand(),
   new UnbanCommand(),
   new UserCommand(),
+  new RoleAdmCommand(),
+  new RoleCommand(),
 ];
 
 if (process.env.NODE_ENV === 'development') {

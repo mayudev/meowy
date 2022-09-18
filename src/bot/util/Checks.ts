@@ -15,7 +15,8 @@ export type AllowedActions =
   | 'BanMembers'
   | 'KickMembers'
   | 'ManageNicknames'
-  | 'TimeoutMembers';
+  | 'TimeoutMembers'
+  | 'ManageRole';
 
 enum Target {
   Neither,

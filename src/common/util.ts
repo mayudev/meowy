@@ -1,4 +1,5 @@
 export const themeColor = '#ffadad';
+export const themeColorBlue = '#3498db';
 
 /**
  * randInt returns a random integer from the range (inclusive)
