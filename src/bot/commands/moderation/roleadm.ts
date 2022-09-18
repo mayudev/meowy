@@ -40,7 +40,7 @@ export default class RoleAdmCommand implements Command {
         }
 
         const targetId = Object.keys(roles).find(
-          (role) => roles[role].name.toLowerCase() === target
+          (role) => roles[role].name.toLowerCase() === target.toLowerCase()
         );
 
         if (!targetId) {
