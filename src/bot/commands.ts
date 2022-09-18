@@ -13,6 +13,7 @@ import UnbanCommand from './commands/moderation/unban';
 import UserCommand from './commands/misc/user';
 import RoleAdmCommand from './commands/moderation/roleadm';
 import RoleCommand from './commands/level/role';
+import HelpCommand from './commands/misc/help';
 
 // Register of all commands provided by the bot
 const commandsRegister: Command[] = [
@@ -28,6 +29,7 @@ const commandsRegister: Command[] = [
   new UserCommand(),
   new RoleAdmCommand(),
   new RoleCommand(),
+  new HelpCommand(),
 ];
 
 if (process.env.NODE_ENV === 'development') {
