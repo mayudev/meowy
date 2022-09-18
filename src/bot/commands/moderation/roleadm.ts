@@ -113,7 +113,7 @@ export default class RoleAdmCommand implements Command {
         let description =
           roles.length > 0
             ? `### Available roles\n${roles.join('\n')}`
-            : 'No roles available';
+            : 'No roles available.';
 
         if (errorMark) description += '\nAn invaild role has been detected!';
 
