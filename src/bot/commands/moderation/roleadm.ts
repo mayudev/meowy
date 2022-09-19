@@ -1,5 +1,6 @@
 import { Message } from 'revolt.js';
 import { themeColorBlue } from '../../../common/util';
+import { getSelfroleList } from '../../handlers/selfroles';
 import Command from '../../types/Command';
 import CommandCategory from '../../types/CommandCategory';
 import CommandContext from '../../types/CommandContext';
@@ -19,7 +20,10 @@ export default class RoleAdmCommand implements Command {
   }
 
   async run(message: Message, context: CommandContext) {
-    if (await Checks.checkPermission(message, 'ManageRole')) {
+    if (
+      (await Checks.checkPermission(message, 'ManageRole')) &&
+      (await Checks.checkPermission(message, 'AssignRoles'))
+    ) {
       const subcommand = context.invocation.args[0];
       const serverId = message.channel?.server_id!;
       const target = context.invocation.args[1];
@@ -92,27 +96,16 @@ export default class RoleAdmCommand implements Command {
         // TODO rank checks
       } else if (subcommand === 'list') {
         // List available selfroles
-        const server = await this.getServer(
-          context,
-          message.channel?.server_id!
+        const { errorMark, roles } = await getSelfroleList(
+          context.controller,
+          message.channel!.server!
         );
-
-        const roles: string[] = [];
-        let errorMark = false;
-
-        server.selfroles.forEach((roleId) => {
-          const role = message.channel?.server!.roles![roleId];
-
-          if (!role) {
-            errorMark = true;
-          } else {
-            roles.push(`- \`${sanitize(role.name)}\``);
-          }
-        });
 
         let description =
           roles.length > 0
-            ? `### Available roles\n${roles.join('\n')}`
+            ? `### Available roles\n${roles
+                .map((role) => `- \`${sanitize(role)}\``)
+                .join('\n')}`
             : 'No roles available.';
 
         if (errorMark) description += '\nAn invaild role has been detected!';
