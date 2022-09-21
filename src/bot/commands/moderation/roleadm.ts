@@ -6,6 +6,7 @@ import CommandCategory from '../../types/CommandCategory';
 import CommandContext from '../../types/CommandContext';
 import Checks from '../../util/Checks';
 import { Results } from '../../util/Results';
+import { getMembersHighestRole } from '../../util/roles';
 import sanitize from '../../util/sanitize';
 
 export default class RoleAdmCommand implements Command {
@@ -53,10 +54,26 @@ export default class RoleAdmCommand implements Command {
           });
         }
 
+        // Rank check
+        const highestRank = getMembersHighestRole(message.member!)?.rank;
+        const targetRank = roles[targetId].rank;
+
+        // Lower rank - more important
+        if (
+          typeof highestRank === 'undefined' ||
+          (typeof targetRank !== 'undefined' && highestRank >= targetRank)
+        ) {
+          return message.channel?.sendMessage({
+            content: `:x: This role is higher or equal to highest role. (your rank: ${highestRank}, role rank: ${targetRank})`,
+          });
+        }
+
         const server = await this.getServer(context, serverId);
         const selfroles = Array.from(server.selfroles);
 
         if (subcommand === 'add') {
+          // Rank warning
+
           if (selfroles.indexOf(targetId) > -1) {
             return message.channel?.sendMessage({
               content: ':x: The role has already been added.',
@@ -92,8 +109,6 @@ export default class RoleAdmCommand implements Command {
             content: `${Results.success} Role has been successfully removed.`,
           });
         }
-
-        // TODO rank checks
       } else if (subcommand === 'list') {
         // List available selfroles
         const { errorMark, roles } = await getSelfroleList(
