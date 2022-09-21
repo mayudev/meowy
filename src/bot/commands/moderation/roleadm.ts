@@ -73,6 +73,14 @@ export default class RoleAdmCommand implements Command {
 
         if (subcommand === 'add') {
           // Rank warning
+          const botRank = getMembersHighestRole(
+            message.channel!.server!.member!
+          )?.rank;
+          if ((botRank || 0) > (targetRank || -1)) {
+            message.channel?.sendMessage({
+              content: `:warning: Bot may be unable to give this role to members due to rankings. Please make sure bot's highest rank is more important (lower number) than the role rank. Bot rank: ${botRank}, role rank: ${targetRank}`,
+            });
+          }
 
           if (selfroles.indexOf(targetId) > -1) {
             return message.channel?.sendMessage({
