@@ -59,8 +59,7 @@ ${sanitize(
     message.channel?.sendMessage({
       embeds: [
         {
-          title: sanitize(getDisplayName(user)),
-          icon_url: user.generateAvatarURL({ size: 64 }),
+          title: `User ${sanitize(getDisplayName(user))}`,
           colour: themeColor,
           description,
         },
