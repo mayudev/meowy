@@ -18,7 +18,7 @@ export default class RoleCommand implements Command {
     const subcommand = context.invocation.args[0];
 
     if (subcommand === 'add' || subcommand === 'remove') {
-      const target = context.invocation.args[1];
+      const target = context.invocation.args.slice(1).join(' ');
 
       if (!target) {
         return message.channel?.sendMessage({

@@ -26,7 +26,7 @@ export default class RoleAdmCommand implements Command {
     ) {
       const subcommand = context.invocation.args[0];
       const serverId = message.channel?.server_id!;
-      const target = context.invocation.args[1];
+      const target = context.invocation.args.slice(1).join(' ');
 
       if (subcommand === 'add' || subcommand === 'remove') {
         if (!target) {
