@@ -1,6 +1,6 @@
 import { Message } from 'revolt.js';
 import { themeColorBlue } from '../../../common/util';
-import { getSelfroleList } from '../../handlers/selfroles';
+import { getSelfroleList, getSelfroles } from '../../handlers/selfroles';
 import Command from '../../types/Command';
 import CommandCategory from '../../types/CommandCategory';
 import CommandContext from '../../types/CommandContext';
@@ -125,7 +125,7 @@ export default class RoleAdmCommand implements Command {
         }
       } else if (subcommand === 'list') {
         // List available selfroles
-        const { errorMark, roles } = await getSelfroleList(
+        const roles = await getSelfroles(
           context.controller,
           message.channel!.server!
         );
@@ -133,11 +133,14 @@ export default class RoleAdmCommand implements Command {
         let description =
           roles.length > 0
             ? `### Available roles\n${roles
-                .map((role) => `- \`${sanitize(role)}\``)
+                .map(
+                  (role) =>
+                    `#### ${sanitize(role.name)} \nID: ${role.id} | Rank: ${
+                      role.rank
+                    }${role.error ? " | Error: role wasn't found" : ''}`
+                )
                 .join('\n')}`
             : 'No roles available.';
-
-        if (errorMark) description += '\nAn invaild role has been detected!';
 
         return message.channel?.sendMessage({
           embeds: [
