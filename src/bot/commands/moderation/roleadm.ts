@@ -44,9 +44,26 @@ export default class RoleAdmCommand implements Command {
           });
         }
 
-        const targetId = Object.keys(roles).find(
-          (role) => roles[role].name.toLowerCase() === target.toLowerCase()
-        );
+        const server = await this.getServer(context, serverId);
+        const selfroles = Array.from(server.selfroles);
+
+        const roleIds = Object.keys(roles);
+
+        let targetId;
+
+        // Try to find by ID
+        if (
+          target.length === 26 &&
+          (roleIds.indexOf(target) > -1 ||
+            (selfroles.indexOf(target) > -1 && subcommand === 'remove')) // allow removal of invalid roles
+        ) {
+          targetId = target;
+        } else {
+          // Otherwise name
+          targetId = roleIds.find(
+            (role) => roles[role].name.toLowerCase() === target.toLowerCase()
+          );
+        }
 
         if (!targetId) {
           return message.channel?.sendMessage({
@@ -54,24 +71,21 @@ export default class RoleAdmCommand implements Command {
           });
         }
 
-        // Rank check
-        const highestRank = getMembersHighestRole(message.member!)?.rank;
-        const targetRank = roles[targetId].rank;
-
-        // Lower rank - more important
-        if (
-          typeof highestRank === 'undefined' ||
-          (typeof targetRank !== 'undefined' && highestRank >= targetRank)
-        ) {
-          return message.channel?.sendMessage({
-            content: `:x: This role is higher or equal to highest role. (your rank: ${highestRank}, role rank: ${targetRank})`,
-          });
-        }
-
-        const server = await this.getServer(context, serverId);
-        const selfroles = Array.from(server.selfroles);
-
         if (subcommand === 'add') {
+          // Rank check
+          const highestRank = getMembersHighestRole(message.member!)?.rank;
+          const targetRank = roles[targetId].rank;
+
+          // Lower rank - more important
+          if (
+            typeof highestRank === 'undefined' ||
+            (typeof targetRank !== 'undefined' && highestRank >= targetRank)
+          ) {
+            return message.channel?.sendMessage({
+              content: `:x: This role is higher or equal to highest role. (your rank: ${highestRank}, role rank: ${targetRank})`,
+            });
+          }
+
           // Rank warning
           const botRank = getMembersHighestRole(
             message.channel!.server!.member!
