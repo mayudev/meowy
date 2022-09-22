@@ -88,6 +88,12 @@ export default class RoleAdmCommand implements Command {
             });
           }
 
+          if (selfroles.length >= 100) {
+            return message.channel?.sendMessage({
+              content: ':x: The selfroles limit was exceeded.',
+            });
+          }
+
           selfroles.push(targetId);
 
           await context.controller.servers.update(serverId, {
