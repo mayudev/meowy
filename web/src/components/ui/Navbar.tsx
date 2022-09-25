@@ -1,7 +1,20 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '../common/Button';
+import { RiMoonFill, RiSunFill } from 'react-icons/ri';
+import { useContext } from 'preact/hooks';
+import { ThemeContext } from '../context/ThemeContext';
 
 export default function Navbar() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const switchTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+
   return (
     <nav>
       <a className="title navigation_link">
@@ -15,7 +28,14 @@ export default function Navbar() {
       <a className="navigation_link">
         <Link to="/commands">Commands</Link>
       </a>
-      <Button primary>Log in</Button>
+      <div className="button_wrapper">
+        <Button onClick={switchTheme} icon title="Toggle theme">
+          <RiMoonFill />
+        </Button>
+      </div>
+      <div className="button_wrapper">
+        <Button primary>Log in</Button>
+      </div>
       <style jsx>{`
         nav {
           display: flex;
@@ -23,6 +43,7 @@ export default function Navbar() {
           margin: 2rem auto;
           max-width: 1200px;
         }
+
         .navigation_link {
           padding: 0.5rem 1rem;
           font-size: 15px;
@@ -41,6 +62,10 @@ export default function Navbar() {
           font-size: 1.5rem;
 
           text-shadow: 0 0 1px var(--color-foreground);
+        }
+
+        .button_wrapper {
+          margin-right: 1rem;
         }
       `}</style>
     </nav>

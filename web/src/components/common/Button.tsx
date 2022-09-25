@@ -1,11 +1,26 @@
+import { useTheme } from '../context/ThemeContext';
+
 type Props = {
   children: JSX.Element | string;
   primary?: boolean;
+  icon?: boolean;
+  title?: string;
+  onClick?(): void;
 };
 
-export default function Button({ children, primary }: Props) {
+export default function Button({
+  children,
+  primary,
+  icon,
+  title,
+  onClick,
+}: Props) {
   return (
-    <button className={`btn ${primary && 'btn_primary'}`}>
+    <button
+      className={`btn ${primary && 'btn_primary'} ${icon && 'btn_icon'}`}
+      title={title}
+      onClick={onClick}
+    >
       {children}{' '}
       <style jsx>{`
         .btn {
@@ -37,6 +52,19 @@ export default function Button({ children, primary }: Props) {
         .btn_primary:hover {
           background: var(--color-primary-2);
           color: var(--color-onprimary);
+        }
+
+        .btn_icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background: inherit;
+        }
+
+        .btn_icon:hover {
+          background: inherit;
+          color: var(--color-foreground-2);
         }
       `}</style>
     </button>
