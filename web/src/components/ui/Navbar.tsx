@@ -40,8 +40,7 @@ export default function Navbar() {
         nav {
           display: flex;
           align-items: center;
-          margin: 2rem auto;
-          max-width: 1200px;
+          margin: 2rem 0;
         }
 
         .navigation_link {
@@ -61,7 +60,7 @@ export default function Navbar() {
           font-weight: 300;
           font-size: 1.5rem;
 
-          text-shadow: 0 0 1px var(--color-foreground);
+          text-shadow: 0 0 15px var(--color-primary);
         }
 
         .button_wrapper {

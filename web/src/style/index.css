@@ -12,32 +12,33 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --color-background: #262d32;
+  --color-background: #25252c;
   --color-background-2: #373f46;
   --color-background-3: #404952;
 
-  --color-foreground: #d9ced8;
-  --color-foreground-2: #e0bfdd;
+  --color-foreground: #f2d6db;
+  --color-foreground-2: #e0a9b2;
 
-  --color-primary: #a776a3;
-  --color-primary-2: #8b6087;
-  --color-onprimary: #e9e0e8;
+  --color-primary: #b25068;
+  --color-primary-2: #96465a;
+  --color-onprimary: #f2d6db;
 }
 
 body[data-theme='light'] {
-  --color-background: #f6f6f6;
-  --color-background-2: #ffffff;
+  --color-background: #ecebeb;
+  --color-background-2: #dcd2d2;
   --color-background-3: #f1f1f1;
 
-  --color-foreground: #1f1f1f;
+  --color-foreground: #3e3838;
   --color-foreground-2: #704870;
 }
 
 body {
   color: var(--color-foreground);
   background-color: var(--color-background);
+  margin: 0;
 
-  transition: 0.2s;
+  transition: 0.4s ease;
 }
 
 a {
