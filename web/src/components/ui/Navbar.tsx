@@ -30,7 +30,7 @@ export default function Navbar() {
       </a>
       <div className="button_wrapper">
         <Button onClick={switchTheme} icon title="Toggle theme">
-          <RiMoonFill />
+          {theme === 'dark' ? <RiSunFill /> : <RiMoonFill />}
         </Button>
       </div>
       <div className="button_wrapper">
