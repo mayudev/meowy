@@ -24,6 +24,7 @@ services:
       - .env
     ports:
       - 3000:3000
+      - 8080:8080
       - 9229:9229
     depends_on:
       - database

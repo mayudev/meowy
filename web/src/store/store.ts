@@ -1,8 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { meowyApi } from './api';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    [meowyApi.reducerPath]: meowyApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(meowyApi.middleware),
 });
 
 // Hooks

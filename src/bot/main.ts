@@ -1,5 +1,6 @@
 import { Db } from 'mongodb';
 import { Client, Message } from 'revolt.js';
+import Api from '../api/main';
 import { readToken } from '../config/config';
 import DatabaseController from '../database/controller';
 import commandsRegister from './commands';
@@ -20,6 +21,10 @@ class Bot {
   start() {
     this.setup();
     this.client.loginBot(readToken());
+
+    const api = new Api(this.controller);
+    api.setup();
+    api.listen(8080);
   }
 
   private setup() {
