@@ -6,11 +6,21 @@ export default function Commands() {
   return (
     <div>
       {error ? (
-        <p>theres an error lol</p>
+        // TODO error handling
+        <p>error</p>
       ) : isLoading ? (
         <p>Loading</p>
       ) : data ? (
-        <p>a</p>
+        <div>
+          {data.map((category) => (
+            <div key={category.name}>
+              {category.name}
+              {category.commands.map((cmd) => (
+                <p key={cmd.name}>{cmd.name}</p>
+              ))}
+            </div>
+          ))}
+        </div>
       ) : null}
     </div>
   );

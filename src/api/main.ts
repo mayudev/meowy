@@ -1,5 +1,6 @@
 import DatabaseController from '../database/controller';
 import express, { Express, Request, Response } from 'express';
+import CommandsController from './controllers/commands';
 
 class Api {
   private app: Express;
@@ -15,11 +16,16 @@ class Api {
 
     const api = express.Router();
 
-    api.get('/commands', (req: Request, res: Response) => {
-      return res.send('a');
-    });
-
+    this.initializeControllers(api);
     this.app.use('/api/v1', api);
+  }
+
+  private initializeControllers(router: express.Router) {
+    const controllers = [new CommandsController(this.controller)];
+
+    controllers.forEach((controller) => {
+      router.use('/', controller.router);
+    });
   }
 
   listen(port: number) {

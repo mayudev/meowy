@@ -17,8 +17,6 @@ export const ThemeProvider = ({ children }: { children: JSX.Element }) => {
   const [theme, setTheme] = useState<ThemeMode>('dark');
 
   useEffect(() => {
-    console.log('odpalenie');
-
     const current = localStorage.getItem('theme');
 
     if (current === 'light') {

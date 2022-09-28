@@ -21,8 +21,9 @@ export default function Layout({ children }: Props) {
 
           box-sizing: border-box;
           min-height: 100vh;
+          max-width: 1200px;
 
-          margin: 0;
+          margin: 0 auto;
           display: flex;
           flex-direction: column;
         }
