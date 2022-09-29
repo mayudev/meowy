@@ -1,3 +1,6 @@
+import CommandCategories from '../components/commands/CommandCategories';
+import CommandsSection from '../components/commands/CommandsSection';
+import Loading from '../components/common/Loading';
 import { useGetCommandsQuery } from '../store/services/commands';
 
 export default function Commands() {
@@ -7,20 +10,24 @@ export default function Commands() {
     <div>
       {error ? (
         // TODO error handling
-        <p>error</p>
+        <p>Error</p>
       ) : isLoading ? (
-        <p>Loading</p>
+        <Loading center />
       ) : data ? (
-        <div>
-          {data.map((category) => (
-            <div key={category.name}>
-              {category.name}
-              {category.commands.map((cmd) => (
-                <p key={cmd.name}>{cmd.name}</p>
-              ))}
-            </div>
-          ))}
-        </div>
+        <section className="commands">
+          <CommandCategories categories={data.map((cat) => cat.name)} />
+          <div>
+            {data.map((cat) => (
+              <CommandsSection section={cat} key={cat.name} />
+            ))}
+          </div>
+
+          <style jsx>{`
+            .commands {
+              display: flex;
+            }
+          `}</style>
+        </section>
       ) : null}
     </div>
   );
