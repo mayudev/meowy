@@ -25,8 +25,8 @@
 }
 
 body[data-theme='light'] {
-  --color-background: #ecebeb;
-  --color-background-2: #dcd2d2;
+  --color-background: #f0f2f5;
+  --color-background-2: #fafafa;
   --color-background-3: #f1f1f1;
 
   --color-foreground: #3e3838;
