@@ -25,7 +25,6 @@ export default function CommandEntry({ command }: Props) {
 
         .name {
           padding: 1rem;
-          font-weight: 500;
           font-size: 1.2rem;
           line-height: normal;
         }

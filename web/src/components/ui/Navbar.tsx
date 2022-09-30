@@ -63,8 +63,6 @@ export default function Navbar() {
         .title {
           font-weight: 300;
           font-size: 1.5rem;
-
-          text-shadow: 0 0 15px var(--color-primary);
         }
 
         .button_wrapper {
