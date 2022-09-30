@@ -23,8 +23,10 @@ export default function Commands() {
           </div>
 
           <style jsx>{`
-            .commands {
-              display: flex;
+            @media (min-width: 700px) {
+              .commands {
+                display: flex;
+              }
             }
           `}</style>
         </section>
