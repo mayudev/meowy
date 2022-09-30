@@ -9,7 +9,7 @@ export default function CommandCategories({ categories }: Props) {
         <div className="title">Commands</div>
         {categories.map((category) => (
           <a href={`#section-${category}`} className="link" key={category}>
-            <p className="link-text">{category}</p>
+            <p className="link_text">{category}</p>
           </a>
         ))}
       </nav>
@@ -28,7 +28,7 @@ export default function CommandCategories({ categories }: Props) {
           padding: 0.5rem 0;
         }
 
-        .link-text {
+        .link_text {
           font-size: 15px;
           line-height: 20px;
           font-weight: 500;
@@ -36,7 +36,7 @@ export default function CommandCategories({ categories }: Props) {
           transition: 200ms;
         }
 
-        .link-text:hover {
+        .link_text:hover {
           color: var(--color-foreground-2);
         }
       `}</style>
