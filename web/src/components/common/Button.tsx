@@ -32,7 +32,7 @@ export default function Button({
           color: inherit;
 
           font-size: 15px;
-          border-radius: 6px;
+          border-radius: 100px;
 
           padding: 0.5rem 1rem;
 

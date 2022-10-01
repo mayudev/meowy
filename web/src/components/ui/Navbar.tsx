@@ -44,11 +44,15 @@ export default function Navbar() {
         nav {
           display: flex;
           align-items: center;
-          margin: 2rem 0;
+          padding: 1rem;
+          margin: 1rem 0;
+
+          background: var(--color-background-2);
+          border-radius: 100px;
         }
 
         .navigation_link {
-          padding: 0.5rem 1rem;
+          padding: 0 1rem;
           font-size: 15px;
         }
 
@@ -61,8 +65,8 @@ export default function Navbar() {
         }
 
         .title {
-          font-weight: 300;
-          font-size: 1.5rem;
+          font-size: 20px;
+          line-height: normal;
         }
 
         .button_wrapper {
