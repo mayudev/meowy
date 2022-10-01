@@ -19,8 +19,8 @@
   --color-foreground: #e1e6ef;
   --color-foreground-2: #c6d1e7;
 
-  --color-primary: #5091b2;
-  --color-primary-2: #3d7692;
+  --color-primary: #5aa4c5;
+  --color-primary-2: #4b809e;
   --color-onprimary: #eff2f9;
 }
 
@@ -29,8 +29,8 @@ body[data-theme='light'] {
   --color-background-2: #fafafa;
   --color-background-3: #f1f1f1;
 
-  --color-foreground: #3e3838;
-  --color-foreground-2: #704870;
+  --color-foreground: #383c3e;
+  --color-foreground-2: #5b798a;
 }
 
 body {

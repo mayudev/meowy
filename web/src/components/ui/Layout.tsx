@@ -16,7 +16,6 @@ export default function Layout({ children }: Props) {
 
       <style jsx>{`
         .container {
-          border-top: 2px solid var(--color-primary);
           padding: 0.5rem;
 
           box-sizing: border-box;
