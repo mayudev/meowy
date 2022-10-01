@@ -34,7 +34,7 @@ export default function Button({
           font-size: 15px;
           border-radius: 100px;
 
-          padding: 0.5rem 1rem;
+          padding: 0.5rem 1.2rem;
 
           transition: 0.2s ease;
           cursor: pointer;

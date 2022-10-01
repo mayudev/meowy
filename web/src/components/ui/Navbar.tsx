@@ -48,9 +48,6 @@ export default function Navbar() {
           align-items: center;
           padding: 1rem;
           margin: 1rem 0;
-
-          background: var(--color-background-2);
-          border-radius: 100px;
         }
 
         .navigation_link {
