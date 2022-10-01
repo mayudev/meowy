@@ -38,7 +38,9 @@ export default function Navbar() {
         </Button>
       </div>
       <div className="button_wrapper">
-        <Button primary>Log in</Button>
+        <Link to="/login">
+          <Button primary>Log in</Button>
+        </Link>
       </div>
       <style jsx>{`
         nav {
